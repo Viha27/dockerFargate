@@ -53,6 +53,21 @@ app.get('/todos',(request,response)=>{
     })
 })
 
+app.get('/timetable',(request,response)=>{
+    const showPending = request.query.showPending
+
+    fs.readFile('./store/timetable.json','utf-8',(err,data)=>{
+        if(err){
+            return response.status(500).send('Sorry,something went wrong')
+        }
+        const time = JSON.parse(data)
+        
+        
+        return response.json({time})
+        
+    })
+})
+
 app.put('/todos/:id/complete',(request,response)=>{
     const id = request.params.id
 
